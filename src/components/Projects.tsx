@@ -114,135 +114,91 @@ const projects = [
 
 const categories = ["All", "Full-Stack", "Mobile", "UI/UX"];
 
-const FirstProjectHero = ({ project }: { project: any }) => {
+const IntroScrollHero = () => {
   return (
     <ContainerScroll className="h-[250vh]">
       <ContainerSticky className="bg-background flex flex-col justify-center items-center overflow-hidden">
         
-        {/* Animated Title moving down as you scroll */}
         <ContainerAnimated 
           className="absolute z-30 space-y-4 text-center top-[15%] w-full px-6"
           inputRange={[0, 0.8]}
           outputRange={[0, 100]}
         >
           <span className="text-primary text-sm font-bold tracking-widest uppercase mb-4 block drop-shadow-md">
-            {project.category}
+            Portfolio
           </span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white drop-shadow-2xl">
-            {project.title}
+            View My Projects
           </h1>
           <p className="mx-auto max-w-2xl text-gray-200 md:text-2xl drop-shadow-xl font-medium mt-6">
-            {project.description}
+            Explore a curated selection of my latest full-stack applications, UI/UX case studies, and designs. 
+            Scroll down to dive into the details.
           </p>
         </ContainerAnimated>
 
-        {/* The expanding image using clip-path */}
         <ContainerInset className="absolute inset-0 w-full h-full z-10 pointer-events-none">
-          <HeroImage src={project.image} alt={project.title} fill />
-          {/* Dark overlay that fades out slightly as the image expands */}
+          <HeroImage src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80" alt="Portfolio Showcase" fill />
           <div className="absolute inset-0 bg-black/60 z-20 pointer-events-none" /> 
         </ContainerInset>
         
-        {/* Buttons sliding up at the very end of the scroll */}
-        <ContainerAnimated
-          transition={{ delay: 0.1 }}
-          outputRange={[100, 0]}
-          inputRange={[0.6, 0.9]}
-          className="absolute z-30 bottom-12 md:bottom-24 flex flex-wrap justify-center gap-4 px-6"
-        >
-          {project.github && project.github !== "#" && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer">
-              <HeroButton className="border-foreground/20 text-foreground hover:bg-foreground/10 backdrop-blur-md px-6 py-3 font-bold">
-                <GithubIcon size={20} className="mr-2" /> Code
-              </HeroButton>
-            </a>
-          )}
-          {project.live && project.live !== "#" && (
-            <a href={project.live} target="_blank" rel="noopener noreferrer">
-              <HeroButton className="bg-foreground text-background font-bold border-foreground px-6 py-3 hover:opacity-90">
-                Live Demo <ExternalLink size={20} className="ml-2" />
-              </HeroButton>
-            </a>
-          )}
-          {project.about && (
-            <a href={project.about}>
-              <HeroButton className="bg-foreground text-background font-bold border-foreground px-6 py-3 hover:opacity-90">
-                About <ExternalLink size={20} className="ml-2" />
-              </HeroButton>
-            </a>
-          )}
-        </ContainerAnimated>
       </ContainerSticky>
     </ContainerScroll>
   )
 }
 
-const FullScreenProject = ({ project, index }: { project: any, index: number }) => {
+const ProjectCard = ({ project }: { project: any }) => {
   return (
-    <div className="h-[150vh] w-full">
-      <div className="h-screen w-full sticky top-0 flex items-center justify-center overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
-        <div className="absolute inset-0 w-full h-full group bg-background">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover object-center transition-all duration-700 group-hover:scale-105 group-hover:blur-sm"
-            draggable={false}
-          />
-        
-        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-colors duration-500 z-10" />
-
-        <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 z-20 flex flex-col justify-end h-full">
-          <div className="transform transition-transform duration-500 translate-y-24 group-hover:translate-y-0">
-            
-            <span className="text-primary text-sm font-bold tracking-widest uppercase mb-4 block drop-shadow-md">
-              {project.category}
-            </span>
-            
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-foreground mb-6 tracking-tight drop-shadow-lg">
-              {project.title}
-            </h1>
-
-            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-              <p className="text-muted-foreground text-lg md:text-2xl max-w-2xl mb-8 drop-shadow-md font-medium">
-                {project.description}
-              </p>
-              
-              <div className="flex flex-wrap gap-2 mb-8">
-                {project.tech.map((tech: string) => (
-                  <span
-                    key={tech}
-                    className="text-sm font-bold text-foreground bg-foreground/10 px-6 py-2 rounded-full backdrop-blur-md border border-foreground/20"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                {project.github && project.github !== "#" && (
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-2 px-8 py-4 bg-background/80 hover:bg-background border border-foreground/20 rounded-full text-foreground transition-colors backdrop-blur-md font-bold text-lg w-full sm:w-auto">
-                    <GithubIcon size={24} /> Code
-                  </a>
-                )}
-                {project.live && project.live !== "#" && (
-                  <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-2 px-8 py-4 bg-foreground text-background hover:opacity-90 rounded-full transition-all font-bold shadow-lg text-lg w-full sm:w-auto">
-                    Live Demo <ExternalLink size={24} />
-                  </a>
-                )}
-                {project.about && (
-                  <a href={project.about} className="flex justify-center items-center gap-2 px-8 py-4 bg-foreground text-background hover:opacity-90 rounded-full transition-all font-bold shadow-lg text-lg w-full sm:w-auto">
-                    About <ExternalLink size={24} />
-                  </a>
-                )}
-              </div>
-            </div>
-
-          </div>
+    <motion.div 
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3 }}
+      className="glass rounded-2xl overflow-hidden border border-border group hover:border-primary/30 transition-colors flex flex-col h-full bg-foreground/5 backdrop-blur-md"
+    >
+      <div className="relative aspect-video overflow-hidden">
+        <Image 
+          src={project.image} 
+          alt={project.title} 
+          fill 
+          className="object-cover transition-transform duration-700 group-hover:scale-105" 
+        />
+        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-10">
+           {project.github && project.github !== "#" && (
+             <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-3 bg-white text-black rounded-full hover:bg-gray-200 transition-colors" title="Source Code">
+               <GithubIcon size={20} />
+             </a>
+           )}
+           {project.live && project.live !== "#" && (
+             <a href={project.live} target="_blank" rel="noopener noreferrer" className="p-3 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity" title="Live Demo">
+               <ExternalLink size={20} />
+             </a>
+           )}
+           {project.about && (
+             <a href={project.about} className="px-4 py-2 font-bold bg-background text-foreground rounded-full hover:bg-foreground hover:text-background transition-colors" title="Read Case Study">
+               Case Study
+             </a>
+           )}
         </div>
       </div>
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="text-primary text-xs font-bold tracking-widest uppercase mb-2">{project.category}</div>
+        <h4 className="text-xl font-bold text-foreground mb-3">{project.title}</h4>
+        <p className="text-muted-foreground text-sm mb-6 flex-grow">{project.description}</p>
+        <div className="flex flex-wrap gap-2">
+          {project.tech.slice(0, 4).map((tech: string) => (
+            <span key={tech} className="text-[10px] font-bold tracking-wider uppercase bg-foreground/10 px-2 py-1 rounded-sm text-foreground/80">
+              {tech}
+            </span>
+          ))}
+          {project.tech.length > 4 && (
+            <span className="text-[10px] font-bold tracking-wider uppercase bg-foreground/10 px-2 py-1 rounded-sm text-foreground/80">
+              +{project.tech.length - 4}
+            </span>
+          )}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -286,26 +242,26 @@ export default function Projects() {
       </div>
 
       <div className="relative w-full pb-32">
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project, idx) => {
-            if (idx === 0) {
-              return <FirstProjectHero key={project.title} project={project} />;
-            }
-            return (
-              <FullScreenProject 
-                key={project.title} 
-                project={project} 
-                index={idx} 
-              />
-            );
-          })}
-        </AnimatePresence>
+        <IntroScrollHero />
         
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-32 text-gray-500">
-            No projects found in this category.
-          </div>
-        )}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 mt-16">
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project) => (
+                <ProjectCard 
+                  key={project.title} 
+                  project={project} 
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+          
+          {filteredProjects.length === 0 && (
+            <div className="text-center py-32 text-gray-500">
+              No projects found in this category.
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
