@@ -155,7 +155,6 @@ const IntroScrollHero = () => {
               speed={1.5}
             />
           </div>
-          </div>
         </ContainerInset>
         
       </ContainerSticky>
