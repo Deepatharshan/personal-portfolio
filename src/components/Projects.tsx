@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -28,24 +28,24 @@ const GithubIcon = ({ size = 24, className = "" }) => (
     strokeLinejoin="round"
     className={className}
   >
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.03c3.15-.38 6.5-1.4 6.5-7.17a5.5 5.5 0 0 0-1.5-3.8c.15-.38.65-1.8-.15-3.8 0 0-1.2-.38-3.9 1.4a13.38 13.38 0 0 0-7 0C6.2 1.6 5 2 5 2c-.8 2-.3 3.4-.15 3.8A5.5 5.5 0 0 0 3 9.6c0 5.75 3.35 6.78 6.5 7.16A4.8 4.8 0 0 0 8.5 18v4" />
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
   </svg>
 );
 
 const projects = [
   {
-    title: "CareerConnect AI",
+    title: "CareerConnect",
     category: "Full-Stack",
-    description: "A highly scalable microservices architecture leveraging Docker and Kubernetes, featuring a React frontend for AI-powered job matching.",
-    tech: ["React", "Docker", "Kubernetes", "Microservices"],
-    github: "https://github.com/Deepatharshan/CareerConnect_AI",
+    description: "An AI-powered job board matching students with employers using resume parsing and smart recommendations.",
+    tech: ["Next.js", "Python", "Supabase", "Machine Learning"],
+    github: "https://github.com/Deepatharshan/careerconnect",
+    live: "https://careerconnect-zeta.vercel.app/",
     about: "/projects/careerconnect",
-    live: null,
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=80",
+    image: "/projects/careerconnect/demo.mp4",
   },
-
   {
-    title: "QuickPlate",
+    title: "QuickPlate POS",
     category: "Full-Stack",
     description: "A comprehensive restaurant management dashboard with table QR ordering and real-time notification sounds.",
     tech: ["PHP", "Laravel", "React", "MySQL", "DigitalOcean"],
@@ -113,8 +113,6 @@ const projects = [
   }
 ];
 
-const categories = ["All", "Full-Stack", "Mobile", "UI/UX"];
-
 const IntroScrollHero = () => {
   return (
     <ContainerScroll className="h-[250vh]">
@@ -163,121 +161,124 @@ const IntroScrollHero = () => {
   )
 }
 
-const ProjectCard = ({ project }: { project: any }) => {
+const EditorialProject = ({ project, index }: { project: any, index: number }) => {
+  const isVideo = project.image.endsWith('.mp4');
+
   return (
-    <motion.div 
-      layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.3 }}
-      className="glass rounded-2xl overflow-hidden border border-border group hover:border-primary/30 transition-colors flex flex-col h-full bg-foreground/5 backdrop-blur-md"
-    >
-      <div className="relative aspect-video overflow-hidden">
-        <Image 
-          src={project.image} 
-          alt={project.title} 
-          fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-105" 
-        />
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-10">
-           {project.github && project.github !== "#" && (
-             <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-3 bg-white text-black rounded-full hover:bg-gray-200 transition-colors" title="Source Code">
-               <GithubIcon size={20} />
-             </a>
-           )}
-           {project.live && project.live !== "#" && (
-             <a href={project.live} target="_blank" rel="noopener noreferrer" className="p-3 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity" title="Live Demo">
-               <ExternalLink size={20} />
-             </a>
-           )}
-           {project.about && (
-             <a href={project.about} className="px-4 py-2 font-bold bg-background text-foreground rounded-full hover:bg-foreground hover:text-background transition-colors" title="Read Case Study">
-               Case Study
-             </a>
-           )}
-        </div>
-      </div>
-      <div className="p-6 flex flex-col flex-grow">
-        <div className="text-primary text-xs font-bold tracking-widest uppercase mb-2">{project.category}</div>
-        <h4 className="text-xl font-bold text-foreground mb-3">{project.title}</h4>
-        <p className="text-muted-foreground text-sm mb-6 flex-grow">{project.description}</p>
-        <div className="flex flex-wrap gap-2">
-          {project.tech.slice(0, 4).map((tech: string) => (
-            <span key={tech} className="text-[10px] font-bold tracking-wider uppercase bg-foreground/10 px-2 py-1 rounded-sm text-foreground/80">
-              {tech}
-            </span>
+    <div className="sticky top-0 h-screen w-full bg-background border-t border-border overflow-hidden flex items-center justify-center">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto h-full flex flex-col md:grid md:grid-cols-6 items-center">
+        
+        {/* Background Grid Lines (Only visible within max-w) */}
+        <div className="absolute inset-0 pointer-events-none z-0 hidden md:grid grid-cols-6 border-x border-border/10">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="border-r border-border/10 h-full w-full" />
           ))}
-          {project.tech.length > 4 && (
-            <span className="text-[10px] font-bold tracking-wider uppercase bg-foreground/10 px-2 py-1 rounded-sm text-foreground/80">
-              +{project.tech.length - 4}
-            </span>
-          )}
         </div>
+
+        {/* Top Labels */}
+        <div className="absolute top-8 left-4 md:left-8 md:col-start-1 md:col-span-1 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold z-20">
+          {project.category}
+        </div>
+        <div className="absolute top-8 right-4 md:right-8 md:col-start-6 md:col-span-1 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold text-right z-20">
+          {`0${index + 1}`}
+        </div>
+
+        {/* Image / Video (Cols 1-3) */}
+        <div className="w-full h-[40vh] md:h-[75vh] md:col-start-1 md:col-end-4 relative flex items-center justify-center px-4 md:px-8 z-10 mt-20 md:mt-0">
+          <div className="relative w-full h-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 rounded-lg md:rounded-none bg-muted/20">
+            {isVideo ? (
+              <video 
+                src={project.image} 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <Image 
+                src={project.image} 
+                alt={project.title} 
+                fill 
+                className="object-cover"
+              />
+            )}
+            <div className="absolute inset-0 bg-black/10 dark:bg-transparent"></div>
+          </div>
+        </div>
+
+        {/* Title (Cols 3-6 Overlap) */}
+        <div className="w-full md:absolute md:left-[40%] md:right-[15%] z-20 flex flex-col justify-center px-4 md:px-0 py-8 md:py-0 -mt-12 md:mt-0">
+          <h2 className="text-5xl md:text-[6rem] lg:text-[7.5rem] leading-[0.85] font-black text-foreground uppercase tracking-tighter drop-shadow-2xl break-words">
+            {project.title}.
+          </h2>
+          
+          <div className="mt-8 flex flex-wrap gap-4">
+             {project.about && (
+               <a href={project.about} className="bg-foreground text-background px-8 py-4 font-bold text-sm uppercase tracking-widest hover:bg-foreground/90 transition-colors inline-block">
+                 Case Study
+               </a>
+             )}
+             {project.live && project.live !== "#" && (
+               <a href={project.live} target="_blank" rel="noopener noreferrer" className="border-2 border-border bg-background/80 backdrop-blur-sm text-foreground px-8 py-4 font-bold text-sm uppercase tracking-widest hover:border-foreground hover:bg-foreground hover:text-background transition-all inline-block">
+                 Live Demo
+               </a>
+             )}
+             {project.github && project.github !== "#" && (
+               <a href={project.github} target="_blank" rel="noopener noreferrer" className="border-2 border-border bg-background/80 backdrop-blur-sm text-foreground px-8 py-4 font-bold text-sm uppercase tracking-widest hover:border-foreground hover:bg-foreground hover:text-background transition-all inline-flex items-center gap-2">
+                 <GithubIcon size={18} /> Code
+               </a>
+             )}
+          </div>
+        </div>
+
+        {/* Description & Tech (Col 6) */}
+        <div className="hidden md:flex w-full md:col-start-6 md:col-span-1 px-8 flex-col justify-center h-full z-10">
+          <p className="text-xs font-medium text-foreground/80 leading-relaxed">
+            {project.description}
+          </p>
+          <div className="mt-12 flex flex-col gap-2">
+            <span className="text-[9px] uppercase tracking-widest font-bold text-foreground">Tech Stack</span>
+            <div className="flex flex-col gap-1">
+              {project.tech.map((t: string) => (
+                 <span key={t} className="text-[10px] text-muted-foreground uppercase tracking-wider">{t}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        {/* Mobile Description */}
+        <div className="md:hidden w-full px-4 pb-12 flex flex-col justify-center z-10 mt-auto">
+           <p className="text-sm font-medium text-foreground/80 leading-relaxed mb-6">
+            {project.description}
+          </p>
+           <div className="flex flex-wrap gap-2">
+              {project.tech.map((t: string) => (
+                 <span key={t} className="text-[10px] text-muted-foreground border border-border/50 px-2 py-1 uppercase tracking-wider">{t}</span>
+              ))}
+            </div>
+        </div>
+
       </div>
-    </motion.div>
-  );
-};
+    </div>
+  )
+}
 
 export default function Projects() {
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const filteredProjects = projects.filter(
-    (project) => activeCategory === "All" || project.category === activeCategory
-  );
-
   return (
-    <section id="projects" className="py-24 relative bg-background border-t border-border transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 relative z-20">
-          <div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-primary mb-4">
-              Portfolio
-            </h2>
-            <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-              Selected Works
-            </h3>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
-                  activeCategory === category
-                    ? "bg-foreground text-background"
-                    : "bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="relative w-full pb-32">
+    <section id="projects" className="relative bg-background border-t border-border transition-colors duration-300">
+      
+      <div className="relative w-full">
         <IntroScrollHero />
         
-        <div className="max-w-7xl mx-auto px-6 md:px-12 mt-16">
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project) => (
-                <ProjectCard 
-                  key={project.title} 
-                  project={project} 
-                />
-              ))}
-            </AnimatePresence>
-          </motion.div>
-          
-          {filteredProjects.length === 0 && (
-            <div className="text-center py-32 text-gray-500">
-              No projects found in this category.
-            </div>
-          )}
+        <div className="w-full relative bg-background">
+          {projects.map((project, index) => (
+            <EditorialProject 
+              key={project.title} 
+              project={project} 
+              index={index}
+            />
+          ))}
         </div>
       </div>
     </section>
