@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 import {
   ContainerAnimated,
@@ -12,7 +13,7 @@ import {
   ContainerSticky,
   HeroButton
 } from "@/components/ui/animated-video-on-scroll";
-import { SparklesCore } from "@/components/ui/sparkles";
+import { DotPattern } from "@/components/ui/dot-pattern";
 
 const GithubIcon = ({ size = 24, className = "" }) => (
   <svg
@@ -144,15 +145,15 @@ const IntroScrollHero = () => {
           <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-purple-400 to-transparent h-px w-1/4 z-40" />
 
           <div className="absolute inset-0 z-30 opacity-100">
-            <SparklesCore
-              id="tsparticlesfullpage"
-              background="transparent"
-              minSize={0.8}
-              maxSize={2}
-              particleDensity={120}
-              className="w-full h-full"
-              particleColor="#E0E7FF"
-              speed={1.5}
+            <DotPattern
+              width={20}
+              height={20}
+              cx={1}
+              cy={1}
+              cr={1}
+              className={cn(
+                "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)] ",
+              )}
             />
           </div>
         </ContainerInset>
