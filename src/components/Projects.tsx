@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -172,9 +172,19 @@ const IntroScrollHero = () => {
 
 const EditorialProject = ({ project, index }: { project: any, index: number }) => {
   const isVideo = project.image.endsWith('.mp4');
+  const isEven = index % 2 === 0;
+
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const grayscaleValue = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [1, 0, 0, 1]);
+  const filter = useMotionTemplate`grayscale(${grayscaleValue})`;
 
   return (
-    <div className="sticky top-0 h-screen w-full bg-background border-t border-border/30 overflow-hidden flex items-center justify-center">
+    <div ref={containerRef} className="sticky top-0 h-screen w-full bg-background border-t border-border/30 overflow-hidden flex items-center justify-center">
       <div className="relative z-10 w-full max-w-[1600px] mx-auto h-full flex flex-col md:grid md:grid-cols-6 items-center">
         
         {/* Background Grid Lines */}
@@ -185,16 +195,19 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
         </div>
 
         {/* Top Labels */}
-        <div className="absolute top-8 left-4 md:left-8 md:col-start-1 md:col-span-1 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold z-20">
+        <div className={cn("absolute top-8 md:col-start-1 md:col-span-1 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold z-20", isEven ? "left-4 md:left-8" : "right-4 md:right-8 text-right")}>
           {project.category}
         </div>
-        <div className="absolute top-8 right-4 md:right-8 md:col-start-6 md:col-span-1 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold text-right z-20">
+        <div className={cn("absolute top-8 md:col-start-6 md:col-span-1 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold z-20", isEven ? "right-4 md:right-8 text-right" : "left-4 md:left-8")}>
           {`0${index + 1}`}
         </div>
 
-        {/* Image / Video (Cols 1-3) */}
-        <div className="w-full h-[40vh] md:h-[75vh] md:col-start-1 md:col-end-4 md:row-start-1 relative flex items-center justify-center px-4 md:px-8 z-10 mt-20 md:mt-0">
-          <div className="relative w-full h-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 rounded-lg md:rounded-none bg-muted/20">
+        {/* Image / Video */}
+        <div className={cn("w-full h-[40vh] md:h-[75vh] md:row-start-1 relative flex items-center justify-center px-4 md:px-8 z-10 mt-20 md:mt-0", isEven ? "md:col-start-1 md:col-end-4" : "md:col-start-4 md:col-end-7")}>
+          <motion.div 
+            style={{ filter }}
+            className="relative w-full h-full overflow-hidden rounded-lg md:rounded-none bg-muted/20"
+          >
             {isVideo ? (
               <video 
                 src={project.image} 
@@ -213,16 +226,16 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
               />
             )}
             <div className="absolute inset-0 bg-black/10 dark:bg-transparent"></div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Title (Cols 3-6 Overlap) */}
-        <div className="w-full md:col-start-3 md:col-span-3 md:row-start-1 z-20 flex flex-col justify-center px-4 md:px-8 py-8 md:py-0 -mt-12 md:mt-0 md:-ml-12 lg:-ml-24">
+        {/* Title */}
+        <div className={cn("w-full md:col-span-3 md:row-start-1 z-20 flex flex-col justify-center px-4 md:px-8 py-8 md:py-0 -mt-12 md:mt-0", isEven ? "md:col-start-3 md:-ml-12 lg:-ml-24" : "md:col-start-2 md:-mr-12 lg:-mr-24 text-right items-end")}>
           <h2 className="text-5xl md:text-5xl lg:text-[5.5rem] xl:text-[6.5rem] leading-[0.9] font-black text-foreground uppercase tracking-tighter drop-shadow-2xl break-words">
             {project.title}.
           </h2>
           
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className={cn("mt-8 flex flex-wrap gap-4", isEven ? "" : "justify-end")}>
              {project.about && (
                <a href={project.about} className="bg-foreground text-background px-8 py-4 font-bold text-sm uppercase tracking-widest hover:bg-foreground/90 transition-colors inline-block">
                  Case Study
@@ -241,12 +254,12 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
           </div>
         </div>
 
-        {/* Description & Tech (Col 6) */}
-        <div className="hidden md:flex w-full md:col-start-6 md:col-span-1 md:row-start-1 px-8 flex-col justify-center h-full z-10">
+        {/* Description & Tech */}
+        <div className={cn("hidden md:flex w-full md:col-span-1 md:row-start-1 px-8 flex-col justify-center h-full z-10", isEven ? "md:col-start-6" : "md:col-start-1 text-right items-end")}>
           <p className="text-xs font-medium text-foreground/80 leading-relaxed">
             {project.description}
           </p>
-          <div className="mt-12 flex flex-col gap-2">
+          <div className={cn("mt-12 flex flex-col gap-2", isEven ? "" : "items-end")}>
             <span className="text-[9px] uppercase tracking-widest font-bold text-foreground">Tech Stack</span>
             <div className="flex flex-col gap-1">
               {project.tech.map((t: string) => (
@@ -261,7 +274,7 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
            <p className="text-sm font-medium text-foreground/80 leading-relaxed mb-6">
             {project.description}
           </p>
-           <div className="flex flex-wrap gap-2">
+           <div className={cn("flex flex-wrap gap-2", isEven ? "" : "justify-end")}>
               {project.tech.map((t: string) => (
                  <span key={t} className="text-[10px] text-muted-foreground border border-border/50 px-2 py-1 uppercase tracking-wider">{t}</span>
               ))}
