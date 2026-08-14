@@ -155,9 +155,7 @@ const IntroScrollHero = () => {
               speed={1.5}
             />
           </div>
-          
-          {/* Radial Gradient to fade out sparkles at the edges smoothly */}
-          <div className="absolute inset-0 w-full h-full bg-slate-900 [mask-image:radial-gradient(500px_300px_at_top,transparent_20%,white)] z-40"></div>
+          </div>
         </ContainerInset>
         
       </ContainerSticky>
