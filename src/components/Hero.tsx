@@ -37,7 +37,7 @@ export default function Hero() {
     offset: ["start start", "end end"],
   });
 
-  const deepaX = useTransform(scrollYProgress, [0, 1], ["-0.1vw", "0vw"]);
+  const deepaX = useTransform(scrollYProgress, [0, 1], ["-0.05vw", "0vw"]);
   const deepaY = useTransform(scrollYProgress, [0, 1], ["-30vh", "0vh"]);
   
   const tharshanX = useTransform(scrollYProgress, [0, 1], ["10vw", "0vw"]);
