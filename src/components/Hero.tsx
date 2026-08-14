@@ -1,20 +1,20 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 
 const StaggeredText = ({ text, className }: { text: string; className?: string }) => {
   const letters = Array.from(text);
-  const container = {
+  const container: Variants = {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
       transition: { staggerChildren: 0.1, delayChildren: 0.1 * i },
     }),
   };
-  const child = {
+  const child: Variants = {
     hidden: { opacity: 0, y: 100 },
     visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20, stiffness: 100 } },
   };
