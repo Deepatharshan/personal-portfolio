@@ -60,13 +60,13 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="relative w-[90%] h-[85%] md:w-[80%] md:h-[80%] max-w-4xl mx-auto mix-blend-darken dark:mix-blend-lighten mt-0 md:-mt-24"
+            className="relative w-[90%] h-[90%] md:w-[80%] md:h-[95%] max-w-4xl mx-auto mix-blend-darken dark:mix-blend-lighten mt-0 md:-mt-12"
           >
             <Image
               src="/profile.jpg"
               alt="Deepatharshan"
               fill
-              className="object-cover object-top opacity-90 dark:opacity-100"
+              className="object-contain object-center opacity-90 dark:opacity-100"
               priority
             />
             {/* Gradient overlays */}
