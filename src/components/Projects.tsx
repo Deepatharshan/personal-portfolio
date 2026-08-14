@@ -165,10 +165,10 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
   const isVideo = project.image.endsWith('.mp4');
 
   return (
-    <div className="sticky top-0 h-screen w-full bg-background border-t border-border overflow-hidden flex items-center justify-center">
+    <div className="sticky top-0 h-screen w-full bg-background border-t border-border/30 overflow-hidden flex items-center justify-center">
       <div className="relative z-10 w-full max-w-[1600px] mx-auto h-full flex flex-col md:grid md:grid-cols-6 items-center">
         
-        {/* Background Grid Lines (Only visible within max-w) */}
+        {/* Background Grid Lines */}
         <div className="absolute inset-0 pointer-events-none z-0 hidden md:grid grid-cols-6 border-x border-border/10">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="border-r border-border/10 h-full w-full" />
@@ -208,8 +208,8 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
         </div>
 
         {/* Title (Cols 3-6 Overlap) */}
-        <div className="w-full md:absolute md:left-[40%] md:right-[15%] z-20 flex flex-col justify-center px-4 md:px-0 py-8 md:py-0 -mt-12 md:mt-0">
-          <h2 className="text-5xl md:text-[6rem] lg:text-[7.5rem] leading-[0.85] font-black text-foreground uppercase tracking-tighter drop-shadow-2xl break-words">
+        <div className="w-full md:col-start-3 md:col-span-3 z-20 flex flex-col justify-center px-4 md:px-8 py-8 md:py-0 -mt-12 md:mt-0 md:-ml-12 lg:-ml-24">
+          <h2 className="text-5xl md:text-6xl lg:text-[6.5rem] leading-[0.9] font-black text-foreground uppercase tracking-tighter drop-shadow-2xl break-words">
             {project.title}.
           </h2>
           
