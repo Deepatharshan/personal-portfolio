@@ -45,6 +45,15 @@ const projects = [
     image: "/projects/careerconnect/demo.mp4",
   },
   {
+    title: "AMP Ceylon",
+    category: "Full-Stack",
+    description: "A comprehensive e-commerce platform for an artificial flower export company.",
+    tech: ["Next.js", "PostgreSQL", "Supabase"],
+    github: null,
+    live: null,
+    image: "/projects/amp-ceylon/AMPvideo.mp4",
+  },
+  {
     title: "QuickPlate POS",
     category: "Full-Stack",
     description: "A comprehensive restaurant management dashboard with table QR ordering and real-time notification sounds.",
