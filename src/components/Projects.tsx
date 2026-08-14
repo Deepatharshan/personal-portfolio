@@ -184,7 +184,7 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
         </div>
 
         {/* Image / Video (Cols 1-3) */}
-        <div className="w-full h-[40vh] md:h-[75vh] md:col-start-1 md:col-end-4 relative flex items-center justify-center px-4 md:px-8 z-10 mt-20 md:mt-0">
+        <div className="w-full h-[40vh] md:h-[75vh] md:col-start-1 md:col-end-4 md:row-start-1 relative flex items-center justify-center px-4 md:px-8 z-10 mt-20 md:mt-0">
           <div className="relative w-full h-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 rounded-lg md:rounded-none bg-muted/20">
             {isVideo ? (
               <video 
@@ -208,8 +208,8 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
         </div>
 
         {/* Title (Cols 3-6 Overlap) */}
-        <div className="w-full md:col-start-3 md:col-span-3 z-20 flex flex-col justify-center px-4 md:px-8 py-8 md:py-0 -mt-12 md:mt-0 md:-ml-12 lg:-ml-24">
-          <h2 className="text-5xl md:text-6xl lg:text-[6.5rem] leading-[0.9] font-black text-foreground uppercase tracking-tighter drop-shadow-2xl break-words">
+        <div className="w-full md:col-start-3 md:col-span-3 md:row-start-1 z-20 flex flex-col justify-center px-4 md:px-8 py-8 md:py-0 -mt-12 md:mt-0 md:-ml-12 lg:-ml-24">
+          <h2 className="text-5xl md:text-5xl lg:text-[5.5rem] xl:text-[6.5rem] leading-[0.9] font-black text-foreground uppercase tracking-tighter drop-shadow-2xl break-words">
             {project.title}.
           </h2>
           
@@ -233,7 +233,7 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
         </div>
 
         {/* Description & Tech (Col 6) */}
-        <div className="hidden md:flex w-full md:col-start-6 md:col-span-1 px-8 flex-col justify-center h-full z-10">
+        <div className="hidden md:flex w-full md:col-start-6 md:col-span-1 md:row-start-1 px-8 flex-col justify-center h-full z-10">
           <p className="text-xs font-medium text-foreground/80 leading-relaxed">
             {project.description}
           </p>
