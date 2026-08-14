@@ -10,8 +10,7 @@ import {
   ContainerInset,
   ContainerScroll,
   ContainerSticky,
-  HeroButton,
-  HeroImage
+  HeroButton
 } from "@/components/ui/animated-video-on-scroll";
 import { SparklesCore } from "@/components/ui/sparkles";
 
@@ -137,10 +136,7 @@ const IntroScrollHero = () => {
           </p>
         </ContainerAnimated>
 
-        <ContainerInset className="absolute inset-0 w-full h-full z-10 pointer-events-none">
-          <HeroImage src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80" alt="Portfolio Showcase" fill />
-          <div className="absolute inset-0 bg-black/70 z-20 pointer-events-none" /> 
-          
+        <ContainerInset className="absolute inset-0 w-full h-full z-10 pointer-events-none bg-black">
           <div className="absolute inset-0 z-30 opacity-70">
             <SparklesCore
               id="tsparticlesfullpage"
