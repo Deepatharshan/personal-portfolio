@@ -136,19 +136,28 @@ const IntroScrollHero = () => {
           </p>
         </ContainerAnimated>
 
-        <ContainerInset className="absolute inset-0 w-full h-full z-10 pointer-events-none bg-black">
-          <div className="absolute inset-0 z-30 opacity-70">
+        <ContainerInset className="absolute inset-0 w-full h-full z-10 pointer-events-none bg-zinc-950 border border-zinc-800/50 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden">
+          {/* Glowing Top Edges */}
+          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-primary/50 to-transparent h-[2px] w-3/4 blur-sm z-40" />
+          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-primary to-transparent h-px w-3/4 z-40" />
+          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500/50 to-transparent h-[5px] w-1/4 blur-sm z-40" />
+          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-400 to-transparent h-px w-1/4 z-40" />
+
+          <div className="absolute inset-0 z-30 opacity-80">
             <SparklesCore
               id="tsparticlesfullpage"
               background="transparent"
               minSize={0.6}
               maxSize={1.4}
-              particleDensity={50}
+              particleDensity={100}
               className="w-full h-full"
               particleColor="#FFFFFF"
               speed={1}
             />
           </div>
+          
+          {/* Radial Gradient to fade out sparkles at the edges smoothly */}
+          <div className="absolute inset-0 w-full h-full bg-zinc-950 [mask-image:radial-gradient(500px_300px_at_top,transparent_20%,white)] z-40"></div>
         </ContainerInset>
         
       </ContainerSticky>
