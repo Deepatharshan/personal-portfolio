@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
 /* Define the light mode variables (default) */
 :root {
   --background: #ffffff;
