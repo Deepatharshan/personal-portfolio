@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 
 const GithubIcon = ({ size = 24, className = "" }) => (
   <svg
@@ -22,6 +23,7 @@ const GithubIcon = ({ size = 24, className = "" }) => (
 );
 
 export default function CareerConnectPage() {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -81,13 +83,19 @@ export default function CareerConnectPage() {
             variants={itemVariants} 
             className="relative w-[100vw] sm:w-[95vw] lg:w-[90vw] max-w-7xl aspect-video rounded-none sm:rounded-3xl overflow-hidden shadow-2xl bg-muted/20 left-1/2 -translate-x-1/2 mt-8 md:mt-16 border-y sm:border border-border"
           >
+            {!isVideoLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-muted/20 z-10">
+                <Loader2 className="w-10 h-10 animate-spin text-primary" />
+              </div>
+            )}
             <video 
               src="/projects/careerconnect/demo.mp4" 
               autoPlay 
               loop 
               muted 
               playsInline
-              className="w-full h-full object-contain bg-black"
+              onLoadedData={() => setIsVideoLoaded(true)}
+              className={`w-full h-full object-contain bg-black transition-opacity duration-500 ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
             />
             <div className="absolute inset-0 bg-black/10 pointer-events-none" />
           </motion.div>

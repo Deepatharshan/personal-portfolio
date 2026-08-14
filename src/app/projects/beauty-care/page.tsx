@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Loader2 } from "lucide-react";
 
 export default function BeautyCarePage() {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -71,13 +73,19 @@ export default function BeautyCarePage() {
               variants={itemVariants} 
               className="relative w-[100vw] sm:w-[95vw] max-w-[1600px] aspect-video rounded-none sm:rounded-3xl overflow-hidden shadow-2xl bg-muted/20 left-1/2 -translate-x-1/2 border-y sm:border border-border"
             >
+              {!isVideoLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center bg-muted/20 z-10">
+                  <Loader2 className="w-10 h-10 animate-spin text-primary" />
+                </div>
+              )}
               <video 
                 src="/projects/beauty-care/admin-demo.mp4" 
                 autoPlay 
                 loop 
                 muted 
                 playsInline
-                className="w-full h-full object-contain"
+                onLoadedData={() => setIsVideoLoaded(true)}
+                className={`w-full h-full object-contain transition-opacity duration-500 ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
               />
               <div className="absolute inset-0 bg-black/10 pointer-events-none" />
             </motion.div>
