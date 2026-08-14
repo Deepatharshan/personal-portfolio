@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, PlayCircle, Loader2 } from "lucide-react";
 
 export default function QuickPlatePage() {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  useEffect(() => {
+    if (videoRef.current && videoRef.current.readyState >= 3) {
+      setIsVideoLoaded(true);
+    }
+  }, []);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -82,12 +89,14 @@ export default function QuickPlatePage() {
                   </div>
                 )}
                 <video 
+                  ref={videoRef}
                   src="/projects/quickplate/demo.mp4" 
                   autoPlay 
                   loop 
                   muted 
                   playsInline
                   onLoadedData={() => setIsVideoLoaded(true)}
+                  onCanPlay={() => setIsVideoLoaded(true)}
                   className={`w-full h-full object-contain transition-opacity duration-500 ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
                 />
                 <div className="absolute inset-0 bg-black/10 pointer-events-none" />
