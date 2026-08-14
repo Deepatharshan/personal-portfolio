@@ -35,47 +35,43 @@ const projects = [
   {
     title: "CareerConnect AI",
     category: "Full-Stack",
-    description: "An AI-powered job matching platform connecting candidates with ideal roles.",
-    tech: ["Next.js", "Python", "OpenAI", "PostgreSQL"],
-    github: "#",
-    live: "#",
+    description: "A highly scalable microservices architecture leveraging Docker and Kubernetes, featuring a React frontend for AI-powered job matching.",
+    tech: ["React", "Docker", "Kubernetes", "Microservices"],
+    github: "https://github.com/Deepatharshan/CareerConnect_AI",
+    about: "/projects/careerconnect",
+    live: null,
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=80",
   },
-  {
-    title: "RentalPro",
-    category: "Full-Stack",
-    description: "A comprehensive property management system for landlords and tenants.",
-    tech: ["Laravel", "React", "MySQL"],
-    github: "#",
-    live: "#",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80",
-  },
+
   {
     title: "QuickPlate",
     category: "Full-Stack",
-    description: "Fast and reliable food delivery application with real-time tracking.",
-    tech: ["React Native", "Node.js", "MongoDB"],
-    github: "#",
-    live: "#",
-    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80",
+    description: "A comprehensive restaurant management dashboard with table QR ordering and real-time notification sounds.",
+    tech: ["PHP", "Laravel", "React", "MySQL", "DigitalOcean"],
+    github: null,
+    live: null,
+    about: "/projects/quickplate",
+    image: "/projects/quickplate/cover.png",
   },
   {
-    title: "Food Donor App",
-    category: "Mobile",
-    description: "Connecting surplus food from restaurants with local charities.",
-    tech: ["Kotlin", "Firebase", "Google Maps API"],
-    github: "#",
-    live: "#",
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1400&q=80",
+    title: "SWAG Clothing Store",
+    category: "Full-Stack",
+    description: "A trendy e-commerce platform built with the MERN stack, featuring advanced filtering, seamless checkout, and a comprehensive admin dashboard.",
+    tech: ["MongoDB", "Express", "React", "Node.js"],
+    github: "https://github.com/Deepatharshan/Swag_clothing",
+    live: null,
+    about: "/projects/swag-clothing",
+    image: "/projects/swag-clothing/cover-light.png",
   },
   {
-    title: "E-Commerce Experience",
-    category: "UI/UX",
-    description: "A modern, high-conversion e-commerce storefront redesign.",
-    tech: ["Figma", "Framer", "React"],
-    github: "#",
-    live: "#",
-    image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1400&q=80",
+    title: "Glowing Beauty Care",
+    category: "Full-Stack",
+    description: "A full-stack beauty care e-commerce platform with comprehensive filtering, order tracking, and an admin dashboard.",
+    tech: ["Next.js", "Neon Postgres", "React"],
+    github: null,
+    live: "https://beauty-care-buzsmvstf-deepatharshans-projects.vercel.app/",
+    about: "/projects/beauty-care",
+    image: "/projects/beauty-care/cover.png",
   },
   {
     title: "Seaside Booking",
@@ -91,36 +87,28 @@ const projects = [
     category: "UI/UX",
     description: "A fully prototyped fitness application featuring workout tracking and community engagement.",
     tech: ["Figma", "Prototyping", "Wireframing"],
-    github: "#",
-    live: "#",
+    github: null,
+    live: "https://www.figma.com/design/Cg6l51IA0oip58PiBA1sDe/FintnessApp?node-id=0-1&t=2IrPTqILpk8rAgUK-1",
+    about: "/projects/fitlife",
     image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1400&q=80",
   },
   {
-    title: "Food Donor App Design",
+    title: "Zero Hunger App Design",
     category: "UI/UX",
     description: "Interactive UI/UX design and prototyping for a food rescue and donation platform.",
     tech: ["Figma", "UI Design", "Prototyping"],
-    github: "#",
-    live: "#",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
+    github: null,
+    live: "https://www.figma.com/design/ZjzdRfwEmFi57KZbDCcObm/Zero-hunger?node-id=0-1&t=e1ae0HLTyNFexZhl-1",
+    image: "/projects/zerohunger/cover.png",
   },
   {
     title: "RentalPro Interface Design",
     category: "UI/UX",
-    description: "Comprehensive dashboard and mobile app design system for property management.",
+    description: "Comprehensive website and dashboard design system for property management.",
     tech: ["Figma", "Design System", "Prototyping"],
-    github: "#",
-    live: "#",
+    github: null,
+    live: "https://www.figma.com/design/tPRiGqwUjnwjxkG7Tatw9P/Rental-Pro-Mock-Up?node-id=0-1&t=E0NHGAUqRROgBWwU-1",
     image: "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=1400&q=80",
-  },
-  {
-    title: "QuickPlate App Prototype",
-    category: "UI/UX",
-    description: "High-fidelity interactive prototype for a seamless food delivery experience.",
-    tech: ["Figma", "User Research", "Prototyping"],
-    github: "#",
-    live: "#",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
   }
 ];
 
@@ -162,16 +150,27 @@ const FirstProjectHero = ({ project }: { project: any }) => {
           inputRange={[0.6, 0.9]}
           className="absolute z-30 bottom-12 md:bottom-24 flex flex-wrap justify-center gap-4 px-6"
         >
-          <a href={project.github}>
-            <HeroButton className="border-foreground/20 text-foreground hover:bg-foreground/10 backdrop-blur-md px-6 py-3 font-bold">
-              <GithubIcon size={20} className="mr-2" /> Code
-            </HeroButton>
-          </a>
-          <a href={project.live}>
-            <HeroButton className="bg-foreground text-background font-bold border-foreground px-6 py-3 hover:opacity-90">
-              Live Demo <ExternalLink size={20} className="ml-2" />
-            </HeroButton>
-          </a>
+          {project.github && project.github !== "#" && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer">
+              <HeroButton className="border-foreground/20 text-foreground hover:bg-foreground/10 backdrop-blur-md px-6 py-3 font-bold">
+                <GithubIcon size={20} className="mr-2" /> Code
+              </HeroButton>
+            </a>
+          )}
+          {project.live && project.live !== "#" && (
+            <a href={project.live} target="_blank" rel="noopener noreferrer">
+              <HeroButton className="bg-foreground text-background font-bold border-foreground px-6 py-3 hover:opacity-90">
+                Live Demo <ExternalLink size={20} className="ml-2" />
+              </HeroButton>
+            </a>
+          )}
+          {project.about && (
+            <a href={project.about}>
+              <HeroButton className="bg-foreground text-background font-bold border-foreground px-6 py-3 hover:opacity-90">
+                About <ExternalLink size={20} className="ml-2" />
+              </HeroButton>
+            </a>
+          )}
         </ContainerAnimated>
       </ContainerSticky>
     </ContainerScroll>
@@ -221,12 +220,21 @@ const FullScreenProject = ({ project, index }: { project: any, index: number }) 
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href={project.github} className="flex justify-center items-center gap-2 px-8 py-4 bg-background/80 hover:bg-background border border-foreground/20 rounded-full text-foreground transition-colors backdrop-blur-md font-bold text-lg w-full sm:w-auto">
-                  <GithubIcon size={24} /> Code
-                </a>
-                <a href={project.live} className="flex justify-center items-center gap-2 px-8 py-4 bg-foreground text-background hover:opacity-90 rounded-full transition-all font-bold shadow-lg text-lg w-full sm:w-auto">
-                  Live Demo <ExternalLink size={24} />
-                </a>
+                {project.github && project.github !== "#" && (
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-2 px-8 py-4 bg-background/80 hover:bg-background border border-foreground/20 rounded-full text-foreground transition-colors backdrop-blur-md font-bold text-lg w-full sm:w-auto">
+                    <GithubIcon size={24} /> Code
+                  </a>
+                )}
+                {project.live && project.live !== "#" && (
+                  <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-2 px-8 py-4 bg-foreground text-background hover:opacity-90 rounded-full transition-all font-bold shadow-lg text-lg w-full sm:w-auto">
+                    Live Demo <ExternalLink size={24} />
+                  </a>
+                )}
+                {project.about && (
+                  <a href={project.about} className="flex justify-center items-center gap-2 px-8 py-4 bg-foreground text-background hover:opacity-90 rounded-full transition-all font-bold shadow-lg text-lg w-full sm:w-auto">
+                    About <ExternalLink size={24} />
+                  </a>
+                )}
               </div>
             </div>
 
