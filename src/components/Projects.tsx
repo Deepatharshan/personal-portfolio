@@ -136,28 +136,28 @@ const IntroScrollHero = () => {
           </p>
         </ContainerAnimated>
 
-        <ContainerInset className="absolute inset-0 w-full h-full z-10 pointer-events-none bg-zinc-950 border border-zinc-800/50 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden">
+        <ContainerInset className="absolute inset-0 w-full h-full z-10 pointer-events-none bg-slate-900 border border-slate-700/80 rounded-2xl md:rounded-3xl shadow-[0_0_60px_-15px_rgba(99,102,241,0.4)] overflow-hidden">
           {/* Glowing Top Edges */}
-          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-primary/50 to-transparent h-[2px] w-3/4 blur-sm z-40" />
-          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-primary to-transparent h-px w-3/4 z-40" />
-          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500/50 to-transparent h-[5px] w-1/4 blur-sm z-40" />
-          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-400 to-transparent h-px w-1/4 z-40" />
+          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500/80 to-transparent h-[2px] w-3/4 blur-sm z-40" />
+          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-400 to-transparent h-px w-3/4 z-40" />
+          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-purple-500/80 to-transparent h-[5px] w-1/4 blur-sm z-40" />
+          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-purple-400 to-transparent h-px w-1/4 z-40" />
 
-          <div className="absolute inset-0 z-30 opacity-80">
+          <div className="absolute inset-0 z-30 opacity-100">
             <SparklesCore
               id="tsparticlesfullpage"
               background="transparent"
-              minSize={0.6}
-              maxSize={1.4}
-              particleDensity={100}
+              minSize={0.8}
+              maxSize={2}
+              particleDensity={120}
               className="w-full h-full"
-              particleColor="#FFFFFF"
-              speed={1}
+              particleColor="#E0E7FF"
+              speed={1.5}
             />
           </div>
           
           {/* Radial Gradient to fade out sparkles at the edges smoothly */}
-          <div className="absolute inset-0 w-full h-full bg-zinc-950 [mask-image:radial-gradient(500px_300px_at_top,transparent_20%,white)] z-40"></div>
+          <div className="absolute inset-0 w-full h-full bg-slate-900 [mask-image:radial-gradient(500px_300px_at_top,transparent_20%,white)] z-40"></div>
         </ContainerInset>
         
       </ContainerSticky>
