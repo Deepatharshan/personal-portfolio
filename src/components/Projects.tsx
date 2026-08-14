@@ -50,7 +50,7 @@ const projects = [
     description: "A comprehensive e-commerce platform for an artificial flower export company.",
     tech: ["Next.js", "PostgreSQL", "Supabase"],
     github: null,
-    live: null,
+    live: "https://amp-ceylon.vercel.app/",
     image: "/projects/amp-ceylon/AMPvideo.mp4",
   },
   {
