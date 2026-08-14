@@ -5,13 +5,6 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 
-import {
-  ContainerAnimated,
-  ContainerInset,
-  ContainerScroll,
-  ContainerSticky,
-  HeroButton
-} from "@/components/ui/animated-video-on-scroll";
 import { SparklesCore } from "@/components/ui/sparkles";
 
 const GithubIcon = ({ size = 24, className = "" }) => (
@@ -116,52 +109,44 @@ const categories = ["All", "Full-Stack", "Mobile", "UI/UX"];
 
 const IntroScrollHero = () => {
   return (
-    <ContainerScroll className="h-[250vh]">
-      <ContainerSticky className="bg-background flex flex-col justify-center items-center overflow-hidden">
+    <div className="relative h-[60vh] min-h-[40rem] w-full flex flex-col items-center justify-center overflow-hidden bg-background">
+      <div className="w-full absolute inset-0 h-full z-0">
+        <SparklesCore
+          id="tsparticlesprojects"
+          background="transparent"
+          minSize={0.6}
+          maxSize={1.4}
+          particleDensity={100}
+          className="w-full h-full"
+          particleColor="#FFFFFF"
+          speed={1}
+        />
+      </div>
+      
+      <div className="relative z-20 flex flex-col items-center text-center px-6">
+        <span className="text-primary text-sm font-bold tracking-widest uppercase mb-4 block drop-shadow-md">
+          Portfolio
+        </span>
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white drop-shadow-2xl mb-6">
+          View My Projects
+        </h1>
         
-        <ContainerAnimated 
-          className="absolute z-30 space-y-4 text-center top-[15%] w-full px-6"
-          inputRange={[0, 0.8]}
-          outputRange={[0, 100]}
-        >
-          <span className="text-primary text-sm font-bold tracking-widest uppercase mb-4 block drop-shadow-md">
-            Portfolio
-          </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white drop-shadow-2xl">
-            View My Projects
-          </h1>
-          <p className="mx-auto max-w-2xl text-gray-200 md:text-2xl drop-shadow-xl font-medium mt-6">
-            Explore a curated selection of my latest full-stack applications, UI/UX case studies, AI integrations, and custom model training. 
-            Scroll down to dive into the details.
-          </p>
-        </ContainerAnimated>
+        <div className="w-[20rem] md:w-[40rem] h-10 relative mb-6">
+          {/* Gradients */}
+          <div className="absolute inset-x-10 md:inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
+          <div className="absolute inset-x-10 md:inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
+          <div className="absolute inset-x-20 md:inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
+          <div className="absolute inset-x-20 md:inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
+        </div>
 
-        <ContainerInset className="absolute inset-0 w-full h-full z-10 pointer-events-none bg-slate-900 border border-slate-700/80 rounded-2xl md:rounded-3xl shadow-[0_0_60px_-15px_rgba(99,102,241,0.4)] overflow-hidden">
-          {/* Glowing Top Edges */}
-          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500/80 to-transparent h-[2px] w-3/4 blur-sm z-40" />
-          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-400 to-transparent h-px w-3/4 z-40" />
-          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-purple-500/80 to-transparent h-[5px] w-1/4 blur-sm z-40" />
-          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-purple-400 to-transparent h-px w-1/4 z-40" />
+        <p className="max-w-2xl text-muted-foreground md:text-xl font-medium">
+          Explore a curated selection of my latest full-stack applications, UI/UX case studies, AI integrations, and custom model training. 
+        </p>
+      </div>
 
-          <div className="absolute inset-0 z-30 opacity-100">
-            <SparklesCore
-              id="tsparticlesfullpage"
-              background="transparent"
-              minSize={0.8}
-              maxSize={2}
-              particleDensity={120}
-              className="w-full h-full"
-              particleColor="#E0E7FF"
-              speed={1.5}
-            />
-          </div>
-          
-          {/* Radial Gradient to fade out sparkles at the edges smoothly */}
-          <div className="absolute inset-0 w-full h-full bg-slate-900 [mask-image:radial-gradient(500px_300px_at_top,transparent_20%,white)] z-40"></div>
-        </ContainerInset>
-        
-      </ContainerSticky>
-    </ContainerScroll>
+      {/* Bottom fade to smoothly transition into the project cards */}
+      <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent z-10" />
+    </div>
   )
 }
 
