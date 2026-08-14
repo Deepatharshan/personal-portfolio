@@ -13,6 +13,7 @@ import {
   HeroButton,
   HeroImage
 } from "@/components/ui/animated-video-on-scroll";
+import { SparklesCore } from "@/components/ui/sparkles";
 
 const GithubIcon = ({ size = 24, className = "" }) => (
   <svg
@@ -131,14 +132,27 @@ const IntroScrollHero = () => {
             View My Projects
           </h1>
           <p className="mx-auto max-w-2xl text-gray-200 md:text-2xl drop-shadow-xl font-medium mt-6">
-            Explore a curated selection of my latest full-stack applications, UI/UX case studies, and designs. 
+            Explore a curated selection of my latest full-stack applications, UI/UX case studies, AI integrations, and custom model training. 
             Scroll down to dive into the details.
           </p>
         </ContainerAnimated>
 
         <ContainerInset className="absolute inset-0 w-full h-full z-10 pointer-events-none">
           <HeroImage src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80" alt="Portfolio Showcase" fill />
-          <div className="absolute inset-0 bg-black/60 z-20 pointer-events-none" /> 
+          <div className="absolute inset-0 bg-black/70 z-20 pointer-events-none" /> 
+          
+          <div className="absolute inset-0 z-30 opacity-70">
+            <SparklesCore
+              id="tsparticlesfullpage"
+              background="transparent"
+              minSize={0.6}
+              maxSize={1.4}
+              particleDensity={50}
+              className="w-full h-full"
+              particleColor="#FFFFFF"
+              speed={1}
+            />
+          </div>
         </ContainerInset>
         
       </ContainerSticky>
