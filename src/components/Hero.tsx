@@ -46,7 +46,7 @@ export default function Hero() {
   const fadeOutY = useTransform(scrollYProgress, [0, 0.5], ["0%", "150%"]);
   const fadeOutOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.15]);
   const imageOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.3]);
 
   return (
@@ -58,9 +58,9 @@ export default function Hero() {
           <motion.div 
             style={{ scale: imageScale, opacity: imageOpacity }}
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1, scale: 1.05 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="relative w-[90%] h-[90%] md:w-[80%] md:h-[95%] max-w-4xl mx-auto mix-blend-darken dark:mix-blend-lighten mt-0 md:-mt-12"
+            className="relative w-[95%] h-[95%] md:w-[90%] md:h-[95%] max-w-[1100px] mx-auto mix-blend-darken dark:mix-blend-lighten mt-0 md:-mt-12"
           >
             <Image
               src="/profile.jpg"
