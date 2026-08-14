@@ -164,6 +164,8 @@ export default function Hero() {
               </a>
               <a
                 href="/cv.pdf"
+                download="Deepatharshan_CV.pdf"
+                target="_blank"
                 className="bg-foreground px-6 py-3 rounded-full text-background text-xs md:text-sm font-bold hover:opacity-80 transition-opacity"
               >
                 DOWNLOAD CV
