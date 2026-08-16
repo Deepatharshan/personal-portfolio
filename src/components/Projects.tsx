@@ -238,7 +238,7 @@ const EditorialProject = ({ project, index }: { project: any, index: number }) =
           <div className={cn("mt-8 flex flex-wrap gap-4", isEven ? "" : "justify-end")}>
              {project.about && (
                <a href={project.about} className="bg-foreground text-background px-8 py-4 font-bold text-sm uppercase tracking-widest hover:bg-foreground/90 transition-colors inline-block">
-                 Case Study
+                 More Details
                </a>
              )}
              {project.live && project.live !== "#" && (

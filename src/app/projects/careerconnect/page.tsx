@@ -94,6 +94,7 @@ export default function CareerConnectPage() {
               loop 
               muted 
               playsInline
+              preload="metadata"
               onLoadedData={() => setIsVideoLoaded(true)}
               className={`w-full h-full object-contain bg-black transition-opacity duration-500 ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
             />
