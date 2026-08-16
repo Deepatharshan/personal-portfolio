@@ -11,8 +11,51 @@ import {
   TestTube, 
   Calculator, 
   Wrench,
-  Server
+  Server,
+  BrainCircuit,
+  MonitorSmartphone,
+  Workflow
 } from "lucide-react";
+
+const specializations = [
+  {
+    title: "Machine Learning & CV",
+    icon: <BrainCircuit className="w-8 h-8 text-primary" />,
+    points: [
+      { label: "Deep Learning", desc: "PyTorch, Torchvision" },
+      { label: "Transfer Learning", desc: "Fine-tuning pre-trained CNN architectures (ResNet18) for custom image classification tasks." },
+      { label: "CV Pipeline", desc: "Implementing image preprocessing, tensor transformations, and normalization for real-time inference." }
+    ]
+  },
+  {
+    title: "Backend Engineering & APIs",
+    icon: <Server className="w-8 h-8 text-primary" />,
+    points: [
+      { label: "FastAPI", desc: "Building high-performance, asynchronous RESTful APIs." },
+      { label: "Model Deployment", desc: "Serving trained PyTorch .pth models in memory for low-latency web inference." },
+      { label: "Data Pipelines", desc: "Handling multipart file uploads and automatic hierarchical data organization." },
+      { label: "Networking", desc: "Configuring CORS for secure frontend-to-backend communication." }
+    ]
+  },
+  {
+    title: "Frontend Web Development",
+    icon: <MonitorSmartphone className="w-8 h-8 text-primary" />,
+    points: [
+      { label: "Modern Frameworks", desc: "React.js, Vite" },
+      { label: "State Management", desc: "React Hooks for complex UI states (loading animations, dynamic galleries)." },
+      { label: "UI/UX & CSS", desc: "Premium, responsive, dark-themed UIs with glassmorphism and keyframe animations." },
+      { label: "Integration", desc: "Fetch API & FormData for dynamic image blob predictions without page reloads." }
+    ]
+  },
+  {
+    title: "System Architecture & MLOps",
+    icon: <Workflow className="w-8 h-8 text-primary" />,
+    points: [
+      { label: "System Design", desc: "Architecting decoupled systems connecting a React frontend to a FastAPI ML backend." },
+      { label: "Active Learning", desc: "Built a continuous data collection flywheel capturing user feedback to automatically categorize data for model retraining." }
+    ]
+  }
+];
 
 const skillCategories = [
   {
@@ -134,9 +177,52 @@ export default function Skills() {
   return (
     <section id="skills" className="py-24 relative bg-background transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="flex flex-col items-start mb-16">
+        
+        {/* Specializations Section */}
+        <div className="flex flex-col items-start mb-12">
           <h2 className="text-sm font-bold uppercase tracking-widest text-primary mb-4">
-            Expertise
+            Specializations
+          </h2>
+          <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+            Areas of Expertise
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-32">
+          {specializations.map((spec, index) => (
+            <motion.div
+              key={spec.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="glass p-8 rounded-2xl border-border hover:border-primary/40 transition-colors flex flex-col group"
+            >
+              <div className="flex items-center gap-5 mb-8">
+                <div className="bg-primary/10 p-3 rounded-xl group-hover:scale-110 transition-transform">
+                  {spec.icon}
+                </div>
+                <h4 className="text-2xl font-bold text-foreground tracking-tight">{spec.title}</h4>
+              </div>
+              
+              <ul className="space-y-4 mt-auto">
+                {spec.points.map((point, i) => (
+                  <li key={i} className="text-sm text-muted-foreground leading-relaxed flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary/60 mt-1.5 shrink-0" />
+                    <div>
+                      <strong className="text-foreground/90 font-bold">{point.label}:</strong> {point.desc}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Technical Arsenal Section */}
+        <div className="flex flex-col items-start mb-12">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-primary mb-4">
+            Technologies
           </h2>
           <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             Technical Arsenal
