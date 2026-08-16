@@ -183,9 +183,12 @@ export default function Skills() {
           <h2 className="text-sm font-bold uppercase tracking-widest text-primary mb-4">
             Specializations
           </h2>
-          <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+          <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6">
             Areas of Expertise
           </h3>
+          <p className="max-w-3xl text-muted-foreground text-lg leading-relaxed">
+            I am actively expanding my knowledge in these domains and applying these advanced skills in real-time through the ongoing development of <strong className="text-foreground">Nutrisense AI</strong> — an end-to-end machine learning and computer vision platform.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-32">
