@@ -28,7 +28,7 @@ export default function Experience() {
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
-                <h4 className="text-2xl font-bold text-foreground">Software Engineering Intern</h4>
+                <h4 className="text-2xl font-bold text-foreground">Software Engineering Intern (Contract Project)</h4>
                 <p className="text-lg text-muted-foreground mt-1">QMatrix AI</p>
               </div>
               <div className="text-sm font-medium text-muted-foreground bg-foreground/5 px-4 py-2 rounded-full inline-block w-fit border border-border">
