@@ -35,9 +35,6 @@ export default function Education() {
               <span className="bg-foreground/10 text-foreground px-4 py-1.5 rounded-full text-sm font-medium mb-2 border border-foreground/5">
                 CGPA: 3.2
               </span>
-              <span className="text-muted-foreground text-sm">
-                Expected Graduation: 2026
-              </span>
             </div>
           </div>
 
