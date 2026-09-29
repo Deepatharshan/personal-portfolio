@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -51,23 +50,17 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="flex items-center gap-4 ml-2">
-            <div className="hidden">
-              <ThemeToggle />
-            </div>
             <a
               href="#contact"
               className="px-5 py-2 text-sm font-medium bg-foreground text-background rounded-full hover:opacity-90 transition-opacity"
             >
-              Let's Talk
+              Let&apos;s Talk
             </a>
           </div>
         </div>
 
         {/* Mobile Toggle */}
         <div className="md:hidden flex items-center gap-4">
-          <div className="hidden">
-            <ThemeToggle />
-          </div>
           <button
             className="text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -103,7 +96,7 @@ export default function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="inline-block px-6 py-3 text-sm font-medium bg-foreground text-background rounded-full w-full text-center"
                 >
-                  Let's Talk
+                  Let&apos;s Talk
                 </a>
               </div>
             </div>

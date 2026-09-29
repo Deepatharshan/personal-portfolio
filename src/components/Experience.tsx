@@ -28,6 +28,50 @@ export default function Experience() {
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
+                <h4 className="text-2xl font-bold text-foreground">Software Engineer</h4>
+                <p className="text-lg text-muted-foreground mt-1">AMP Ceylon</p>
+              </div>
+              <div className="text-sm font-medium text-muted-foreground bg-foreground/5 px-4 py-2 rounded-full inline-block w-fit border border-border">
+                2025 &ndash; Present &middot; On-site / Sri Lanka
+              </div>
+            </div>
+
+            <p className="text-muted-foreground mb-6 text-lg leading-relaxed font-light">
+              Designed and built the company&apos;s <strong>HR &amp; Payroll System</strong> end-to-end, replacing a legacy FoxPro application and manual spreadsheets.
+              Re-architected and migrated the existing database, integrated ZKTeco biometric time clocks, built the OT and statutory payroll engines with report generation
+              and dot-matrix printing, and handled all testing before rollout.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-2">
+              {["Electron", "React", "Node.js", "SQLite", "ZKTeco"].map((tech) => (
+                <span
+                  key={tech}
+                  className="text-xs font-semibold text-foreground bg-foreground/10 px-3 py-1.5 rounded-md border border-foreground/5"
+                >
+                  {tech}
+                </span>
+              ))}
+              <a
+                href="/projects/hr-payroll"
+                className="ml-1 text-xs font-bold uppercase tracking-widest text-primary hover:underline"
+              >
+                View Project &rarr;
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="relative pl-8 md:pl-12"
+          >
+            {/* Timeline Dot */}
+            <div className="absolute -left-[5px] top-1 w-[10px] h-[10px] rounded-full bg-primary ring-4 ring-card transition-colors" />
+
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div>
                 <h4 className="text-2xl font-bold text-foreground">Software Engineering Intern (Contract Project)</h4>
                 <p className="text-lg text-muted-foreground mt-1">QMatrix AI</p>
               </div>

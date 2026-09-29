@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
+import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -11,7 +10,6 @@ import {
   ContainerInset,
   ContainerScroll,
   ContainerSticky,
-  HeroButton
 } from "@/components/ui/animated-video-on-scroll";
 import { DotPattern } from "@/components/ui/dot-pattern";
 
@@ -43,6 +41,17 @@ const projects = [
     live: "https://careerconnect-zeta.vercel.app/",
     about: "/projects/careerconnect",
     image: "/projects/careerconnect/demo.mp4",
+  },
+  {
+    title: "HR & Payroll System",
+    category: "Desktop ERP",
+    company: "Built at AMP Ceylon",
+    description: "An offline-first desktop HR and payroll ERP that replaced the company's legacy FoxPro system — syncing ZKTeco biometric clocks, calculating OT and statutory payroll, and printing dot-matrix reports.",
+    tech: ["Electron", "React 19", "Tailwind CSS v4", "Node.js", "Express", "better-sqlite3", "ZKTeco"],
+    github: null,
+    live: null,
+    about: "/projects/hr-payroll",
+    image: "/projects/hr-payroll/cover.svg",
   },
   {
     title: "AMP Ceylon",
@@ -170,119 +179,93 @@ const IntroScrollHero = () => {
   )
 }
 
-const EditorialProject = ({ project, index }: { project: any, index: number }) => {
+type Project = (typeof projects)[number];
+
+const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
   const isVideo = project.image.endsWith('.mp4');
-  const isEven = index % 2 === 0;
-
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const grayscaleValue = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [1, 0, 0, 1]);
-  const filter = useMotionTemplate`grayscale(${grayscaleValue})`;
+  const hasLive = project.live && project.live !== "#";
+  const hasGithub = project.github && project.github !== "#";
 
   return (
-    <div ref={containerRef} className="sticky top-0 h-screen w-full bg-background border-t border-border/30 overflow-hidden flex items-center justify-center">
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto h-full flex flex-col md:grid md:grid-cols-6 items-center">
-        
-        {/* Background Grid Lines */}
-        <div className="absolute inset-0 pointer-events-none z-0 hidden md:grid grid-cols-6 border-x border-border/10">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="border-r border-border/10 h-full w-full" />
+    <motion.article
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
+      className="group flex flex-col h-full overflow-hidden rounded-2xl border border-border bg-card hover:bg-card-hover hover:border-foreground/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
+    >
+      {/* Media */}
+      <div className="relative aspect-video w-full overflow-hidden bg-border/40">
+        {isVideo ? (
+          <video
+            src={project.image}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <span className="absolute top-4 left-4 rounded-full bg-background/80 backdrop-blur-sm px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground">
+          {project.category}
+        </span>
+        <span className="absolute top-4 right-4 text-xs font-bold tracking-widest text-white drop-shadow">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-col flex-1 p-6">
+        <h3 className="text-2xl font-black tracking-tight text-foreground">
+          {project.title}
+        </h3>
+        {project.company && (
+          <p className="mt-1 text-xs font-bold uppercase tracking-widest text-primary">
+            {project.company}
+          </p>
+        )}
+        <p className="mt-3 text-sm leading-relaxed text-muted">
+          {project.description}
+        </p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.tech.map((t) => (
+            <span key={t} className="rounded-md border border-border px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-muted">
+              {t}
+            </span>
           ))}
         </div>
 
-        {/* Top Labels */}
-        <div className={cn("absolute top-8 md:col-start-1 md:col-span-1 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold z-20", isEven ? "left-4 md:left-8" : "right-4 md:right-8 text-right")}>
-          {project.category}
+        {/* Buttons */}
+        <div className="mt-auto pt-6 flex flex-wrap gap-3">
+          {project.about && (
+            <a href={project.about} className="rounded-lg bg-foreground text-background px-4 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-foreground/85 transition-colors">
+              More Details
+            </a>
+          )}
+          {hasLive && (
+            <a href={project.live!} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-foreground hover:border-foreground hover:bg-foreground hover:text-background transition-all">
+              <ExternalLink size={14} /> Live Demo
+            </a>
+          )}
+          {hasGithub && (
+            <a href={project.github!} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-foreground hover:border-foreground hover:bg-foreground hover:text-background transition-all">
+              <GithubIcon size={14} /> Code
+            </a>
+          )}
         </div>
-        <div className={cn("absolute top-8 md:col-start-6 md:col-span-1 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold z-20", isEven ? "right-4 md:right-8 text-right" : "left-4 md:left-8")}>
-          {`0${index + 1}`}
-        </div>
-
-        {/* Image / Video */}
-        <div className={cn("w-full h-[40vh] md:h-[75vh] md:row-start-1 relative flex items-center justify-center px-4 md:px-8 z-10 mt-20 md:mt-0", isEven ? "md:col-start-1 md:col-end-4" : "md:col-start-4 md:col-end-7")}>
-          <motion.div 
-            style={{ filter }}
-            className="relative w-full h-full overflow-hidden rounded-lg md:rounded-none bg-muted/20"
-          >
-            {isVideo ? (
-              <video 
-                src={project.image} 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <Image 
-                src={project.image} 
-                alt={project.title} 
-                fill 
-                className="object-cover"
-              />
-            )}
-            <div className="absolute inset-0 bg-black/10 dark:bg-transparent"></div>
-          </motion.div>
-        </div>
-
-        {/* Title */}
-        <div className={cn("w-full md:col-span-3 md:row-start-1 z-20 flex flex-col justify-center px-4 md:px-8 py-8 md:py-0 -mt-12 md:mt-0", isEven ? "md:col-start-3 md:-ml-12 lg:-ml-24" : "md:col-start-2 md:-mr-12 lg:-mr-24 text-right items-end")}>
-          <h2 className="text-5xl md:text-5xl lg:text-[5.5rem] xl:text-[6.5rem] leading-[0.9] font-black text-foreground uppercase tracking-tighter drop-shadow-2xl break-words">
-            {project.title}.
-          </h2>
-          
-          <div className={cn("mt-8 flex flex-wrap gap-4", isEven ? "" : "justify-end")}>
-             {project.about && (
-               <a href={project.about} className="bg-foreground text-background px-8 py-4 font-bold text-sm uppercase tracking-widest hover:bg-foreground/90 transition-colors inline-block">
-                 More Details
-               </a>
-             )}
-             {project.live && project.live !== "#" && (
-               <a href={project.live} target="_blank" rel="noopener noreferrer" className="border-2 border-border bg-background/80 backdrop-blur-sm text-foreground px-8 py-4 font-bold text-sm uppercase tracking-widest hover:border-foreground hover:bg-foreground hover:text-background transition-all inline-block">
-                 Live Demo
-               </a>
-             )}
-             {project.github && project.github !== "#" && (
-               <a href={project.github} target="_blank" rel="noopener noreferrer" className="border-2 border-border bg-background/80 backdrop-blur-sm text-foreground px-8 py-4 font-bold text-sm uppercase tracking-widest hover:border-foreground hover:bg-foreground hover:text-background transition-all inline-flex items-center gap-2">
-                 <GithubIcon size={18} /> Code
-               </a>
-             )}
-          </div>
-        </div>
-
-        {/* Description & Tech */}
-        <div className={cn("hidden md:flex w-full md:col-span-1 md:row-start-1 px-8 flex-col justify-center h-full z-10", isEven ? "md:col-start-6" : "md:col-start-1 text-right items-end")}>
-          <p className="text-xs font-medium text-foreground/80 leading-relaxed">
-            {project.description}
-          </p>
-          <div className={cn("mt-12 flex flex-col gap-2", isEven ? "" : "items-end")}>
-            <span className="text-[9px] uppercase tracking-widest font-bold text-foreground">Tech Stack</span>
-            <div className="flex flex-col gap-1">
-              {project.tech.map((t: string) => (
-                 <span key={t} className="text-[10px] text-muted-foreground uppercase tracking-wider">{t}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-        
-        {/* Mobile Description */}
-        <div className="md:hidden w-full px-4 pb-12 flex flex-col justify-center z-10 mt-auto">
-           <p className="text-sm font-medium text-foreground/80 leading-relaxed mb-6">
-            {project.description}
-          </p>
-           <div className={cn("flex flex-wrap gap-2", isEven ? "" : "justify-end")}>
-              {project.tech.map((t: string) => (
-                 <span key={t} className="text-[10px] text-muted-foreground border border-border/50 px-2 py-1 uppercase tracking-wider">{t}</span>
-              ))}
-            </div>
-        </div>
-
       </div>
-    </div>
+    </motion.article>
   )
 }
 
@@ -293,14 +276,16 @@ export default function Projects() {
       <div className="relative w-full">
         <IntroScrollHero />
         
-        <div className="w-full relative bg-background">
-          {projects.map((project, index) => (
-            <EditorialProject 
-              key={project.title} 
-              project={project} 
-              index={index}
-            />
-          ))}
+        <div className="w-full relative bg-background px-4 md:px-8 py-20 md:py-28">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {projects.map((project, index) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                index={index}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
